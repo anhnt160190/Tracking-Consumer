@@ -13,7 +13,7 @@ const kafka = new Kafka({
 const producer = kafka.producer();
 const consumer = kafka.consumer({ groupId: '1' });
 
-const test = async () => {
+const ReadKafkaAndSaveToDB = async () => {
   await consumer.connect();
   await consumer.subscribe({ topic: Keys.KAFKA_TOPIC, fromBeginning: true });
 
@@ -24,4 +24,4 @@ const test = async () => {
   });
 };
 
-test();
+ReadKafkaAndSaveToDB();
