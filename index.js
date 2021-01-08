@@ -89,7 +89,7 @@ const FakeCarDestiny = async () => {
   const now = new Date();
   const newCarDestiny = new CarDestiny({
     total: GetRandomInt(0, 100),
-    month: now.getMonth(),
+    month: now.getMonth() + 1,
     year: now.getFullYear(),
   });
   await newCarDestiny.save();
@@ -99,7 +99,7 @@ const FakeAccident = async () => {
   const now = new Date();
   const newAccident = new Accident({
     total: GetRandomInt(0, 10),
-    month: now.getMonth(),
+    month: now.getMonth() + 1,
     year: now.getFullYear(),
   });
   await newAccident.save();
