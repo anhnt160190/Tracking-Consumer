@@ -2,7 +2,12 @@ const { Kafka } = require('kafkajs');
 const mongoose = require('mongoose');
 const gps = require('./models/gps');
 const Gps = require('./models/gps');
-const { CarPercent, CarColor, CarDestiny, Accident } = require('./models/chart');
+const {
+  CarPercent,
+  CarColor,
+  CarDestiny,
+  Accident,
+} = require('./models/chart');
 
 const Keys = {
   KAFKA_BROKER: process.env.KAFKA_BROKER || 'kafka:9092',
@@ -12,13 +17,15 @@ const Keys = {
 
 const ConnectDB = async () => {
   try {
-    await mongoose.connect(Keys.MONGO_URL, { useNewUrlParser: true, useUnifiedTopology: true });
+    await mongoose.connect(Keys.MONGO_URL, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
     console.log('CONNECT DB');
   } catch (error) {
     console.log(`MONGODB Connect Error ${error}`);
   }
 };
-
 
 const kafka = new Kafka({
   clientId: 'save_data',
@@ -47,7 +54,12 @@ const SaveGps = async (gps) => {
 };
 
 const FakeStatistic = async () => {
-  await Promise.all([FakeCarPercent(), FakeCarColor(), FakeCarDestiny(), FakeAccident()]);
+  await Promise.all([
+    FakeCarPercent(),
+    FakeCarColor(),
+    FakeCarDestiny(),
+    FakeAccident(),
+  ]);
 };
 
 const FakeCarPercent = async () => {
@@ -74,15 +86,21 @@ const FakeCarColor = async () => {
 };
 
 const FakeCarDestiny = async () => {
+  const now = new Date();
   const newCarDestiny = new CarDestiny({
     total: GetRandomInt(0, 100),
+    month: now.getMonth(),
+    year: now.getFullYear(),
   });
   await newCarDestiny.save();
 };
 
 const FakeAccident = async () => {
+  const now = new Date();
   const newAccident = new Accident({
     total: GetRandomInt(0, 10),
+    month: now.getMonth(),
+    year: now.getFullYear(),
   });
   await newAccident.save();
 };

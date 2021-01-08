@@ -29,6 +29,8 @@ exports.CarColor = model('car_color', CarColorSchema);
 
 const CarDestinySchema = new Schema(
   {
+    year: Number,
+    month: Number,
     total: Number,
   },
   { timestamps: true }
@@ -38,6 +40,8 @@ exports.CarDestiny = model('car_destiny', CarDestinySchema);
 
 const AccidentSchema = new Schema(
   {
+    year: Number,
+    month: Number,
     total: Number,
   },
   { timestamps: true }
