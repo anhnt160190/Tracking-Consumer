@@ -4,6 +4,7 @@ const GpsSchema = new Schema(
   {
     lat: Number,
     lng: Number,
+    license: String,
   },
   { timestamps: true }
 );

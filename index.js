@@ -1,6 +1,5 @@
 const { Kafka } = require('kafkajs');
 const mongoose = require('mongoose');
-const gps = require('./models/gps');
 const Gps = require('./models/gps');
 const {
   CarPercent,
@@ -20,6 +19,7 @@ const ConnectDB = async () => {
     await mongoose.connect(Keys.MONGO_URL, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
+      useCreateIndex: true,
     });
     console.log('CONNECT DB');
   } catch (error) {
@@ -43,7 +43,10 @@ const ReadKafkaAndSaveToDB = async () => {
   await consumer.run({
     eachMessage: async ({ topic, partition, message }) => {
       console.log(`receive data at: ${new Date()} with data: ${message.value}`);
-      await Promise.all([SaveGps(message.value), FakeStatistic()]);
+      await Promise.all([
+        SaveGps(JSON.parse(message.value.toString())),
+        FakeStatistic(),
+      ]);
     },
   });
 };
