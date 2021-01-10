@@ -71,12 +71,12 @@ const FakeStatistic = async () => {
 
 const FakeCarPercent = async () => {
   const newCarPercent = new CarPercent({
-    car: GetRandomInt(0, 100),
-    mortobike: GetRandomInt(100, 500),
-    bus: GetRandomInt(0, 100),
-    bike: GetRandomInt(0, 100),
-    walk: GetRandomInt(0, 100),
-    others: GetRandomInt(30, 100),
+    car: GetRandomInt(0, 50),
+    mortobike: GetRandomInt(400, 500),
+    bus: GetRandomInt(0, 20),
+    bike: GetRandomInt(0, 50),
+    walk: GetRandomInt(0, 50),
+    others: GetRandomInt(0, 100),
   });
   await newCarPercent.save();
 };
@@ -96,8 +96,7 @@ const FakeCarDestiny = async () => {
   const now = new Date();
   const newCarDestiny = new CarDestiny({
     total: GetRandomInt(0, 100),
-    month: now.getMonth() + 1,
-    year: now.getFullYear(),
+    hour: now.getHours(),
   });
   await newCarDestiny.save();
 };

@@ -29,8 +29,7 @@ exports.CarColor = model('car_color', CarColorSchema);
 
 const CarDestinySchema = new Schema(
   {
-    year: Number,
-    month: Number,
+    hour: Number,
     total: Number,
   },
   { timestamps: true }
