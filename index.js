@@ -42,7 +42,11 @@ const ReadKafkaAndSaveToDB = async () => {
 
   await consumer.run({
     eachMessage: async ({ topic, partition, message }) => {
-      console.log(`receive data at: ${new Date()} with data: ${message.value}`);
+      console.log(
+        `time: ${new Date()} \n Consumer service receive data : ${
+          message.value
+        }`
+      );
       await Promise.all([
         SaveGps(JSON.parse(message.value.toString())),
         FakeStatistic(),
